@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @SpringBootApplication
 @EnableConfigurationProperties
 public class Application implements CommandLineRunner
@@ -23,6 +26,6 @@ public class Application implements CommandLineRunner
     public void run( String... args )
         throws Exception
     {
-        System.err.println( context );
+        log.info( "Context: " + context );
     }
 }

@@ -8,20 +8,21 @@ import org.hisp.dhis.integration.common.properties.DhisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Configuration
+@RequiredArgsConstructor
 public class DhisConfiguration
 {
     private final DhisProperties dhisProperties;
-
-    public DhisConfiguration( DhisProperties dhisProperties )
-    {
-        this.dhisProperties = dhisProperties;
-    }
 
     @Bean
     public DhisContext getDhisContext()
     {
         DhisContext ctx = new DhisContext();
+        log.info( "Properties: " + dhisProperties );
 
         dhisProperties.getInventory().getHosts().forEach( ( k, v ) -> {
             // TODO add ctx.addHost(..) shortcut
