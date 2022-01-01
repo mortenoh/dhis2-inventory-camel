@@ -1,5 +1,7 @@
 package org.hisp.dhis.integration.common.context;
 
+import java.util.Base64;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
@@ -19,4 +21,9 @@ public class Host
 
     @NonNull
     private String password;
+
+    public String getAuthorizationHeader()
+    {
+        return "Basic " + Base64.getEncoder().encodeToString( (username + ":" + password).getBytes() );
+    }
 }
