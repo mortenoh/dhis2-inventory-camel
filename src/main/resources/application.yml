@@ -1,0 +1,20 @@
+camel:
+  springboot:
+    main-run-controller: false # true for long-running camel tasks
+dhis2:
+  inventory:
+    hosts:
+      playdev:
+        type: dhis2
+        baseUrl: https://play.dhis2.org/dev
+        username: admin
+        password: district
+      playdemo:
+        type: dhis2
+        baseUrl: https://play.dhis2.org/dev
+        username: admin
+        password: district
+    groups:
+      play:
+        - playdev
+        - playdemo
