@@ -22,11 +22,11 @@ public class DhisConfiguration
     public DhisContext getDhisContext()
     {
         DhisContext ctx = new DhisContext();
-        System.err.println( dhisProperties );
 
         dhisProperties.getInventory().getHosts().forEach( ( k, v ) -> {
             // TODO add ctx.addHost(..) shortcut
             Host host = Host.builder()
+                .type( v.getType() )
                 .baseUrl( v.getBaseUrl() )
                 .username( v.getUsername() )
                 .password( v.getPassword() )
