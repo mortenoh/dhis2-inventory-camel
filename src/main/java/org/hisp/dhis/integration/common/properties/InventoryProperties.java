@@ -4,15 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import lombok.Data;
 
 @Data
-@Valid
+@Validated
 @Component
 @ConfigurationProperties( "dhis2.inventory" )
 public class InventoryProperties
