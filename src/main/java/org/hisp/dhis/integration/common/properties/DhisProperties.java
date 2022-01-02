@@ -15,7 +15,7 @@ import lombok.Data;
 @ConfigurationProperties( "dhis2" )
 public class DhisProperties
 {
-    @NotNull
     @Valid
+    @NotNull
     private InventoryProperties inventory;
 }

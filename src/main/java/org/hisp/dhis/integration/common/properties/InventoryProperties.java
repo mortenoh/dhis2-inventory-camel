@@ -17,7 +17,7 @@ import lombok.Data;
 public class InventoryProperties
 {
     /**
-     * Should we verify the host availability/credentials on startup.
+     * Should we verify the host availability/credentials on startup?
      */
     private boolean verify;
 
