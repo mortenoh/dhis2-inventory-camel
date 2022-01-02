@@ -16,6 +16,12 @@ import lombok.Data;
 public class DhisProperties
 {
     @Valid
+    private SourceProperties source;
+
+    @Valid
+    private DestinationProperties destination;
+
+    @Valid
     @NotNull
     private InventoryProperties inventory;
 }

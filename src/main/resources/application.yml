@@ -5,6 +5,16 @@ camel:
   springboot:
     main-run-controller: false # true for long-running camel tasks
 dhis2:
+  source:
+    host: playdev
+    properties:
+      token: MyToken 123123
+  destination:
+    hosts:
+      - playdev
+      - playdemo
+    properties:
+      token: SomeToken ID123
   inventory:
     hosts:
       playdev:
