@@ -14,10 +14,11 @@ dhis2:
         password: district
       playdemo:
         type: dhis2
-        baseUrl: https://play.dhis2.org/dev
+        baseUrl: https://play.dhis2.org/demo
         username: admin
         password: district
     groups:
       play:
         - playdev
         - playdemo
+    verify: true
