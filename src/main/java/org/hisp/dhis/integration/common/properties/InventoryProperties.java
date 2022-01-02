@@ -17,6 +17,11 @@ import lombok.Data;
 @ConfigurationProperties( "dhis2.inventory" )
 public class InventoryProperties
 {
+    /**
+     * Should we verify the host availability/credentials on startup.
+     */
+    private boolean verify;
+
     private Map<String, HostProperties> hosts = new HashMap<>();
 
     private Map<String, List<String>> groups = new HashMap<>();
