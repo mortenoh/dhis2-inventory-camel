@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -66,7 +67,10 @@ public class DhisConfiguration
 
         if ( dhisProperties.getInventory().isVerify() )
         {
-            ctx.getHosts().values().forEach( this::verifyHost );
+            for ( Host host : ctx.getHosts().values() )
+            {
+                verifyHost( host );
+            }
         }
 
         return ctx;
@@ -76,7 +80,8 @@ public class DhisConfiguration
     // Helpers
     // --------------------------------------------------------------------------------------------
 
-    private void verifyHost( Host host )
+    private boolean verifyHost( Host host )
+        throws Exception
     {
         HttpHeaders headers = new HttpHeaders();
         headers.set( "Content-Type", MediaType.APPLICATION_JSON_VALUE );
@@ -87,10 +92,26 @@ public class DhisConfiguration
             .buildAndExpand( host.getBaseUrl() )
             .encode();
 
-        ResponseEntity<SystemInfo> response = restTemplate().exchange( uriComponents.toUri(),
-            HttpMethod.GET, new HttpEntity<>( headers ), SystemInfo.class );
+        try
+        {
+            ResponseEntity<SystemInfo> response = restTemplate().exchange( uriComponents.toUri(),
+                HttpMethod.GET, new HttpEntity<>( headers ), SystemInfo.class );
 
-        System.err.println( response.getBody() );
+            if ( !response.getStatusCode().is2xxSuccessful() )
+            {
+                log.error( "Invalid host: " + host );
+                return false;
+            }
+
+            log.info( response.getBody() );
+        }
+        catch ( HttpClientErrorException ex )
+        {
+            log.error( "Invalid host: " + host );
+            return false;
+        }
+
+        return true;
     }
 }
 

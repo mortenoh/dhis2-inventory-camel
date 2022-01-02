@@ -9,7 +9,7 @@ dhis2:
     hosts:
       playdev:
         type: dhis2
-        baseUrl: https://play.dhis2.org/dev
+        baseUrl: https://play.dhis2.org/de
         username: admin
         password: district
       playdemo:
