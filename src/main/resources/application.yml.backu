@@ -1,0 +1,34 @@
+spring:
+  main:
+    banner-mode: off
+camel:
+  springboot:
+    main-run-controller: false # true for long-running camel tasks
+dhis2:
+  source:
+    host: playdev
+    properties:
+      token: MyToken 123123
+  destination:
+    hosts:
+      - playdev
+      - playdemo
+    properties:
+      token: SomeToken ID123
+  inventory:
+    hosts:
+      playdev:
+        type: dhis2
+        baseUrl: https://play.dhis2.org/dev
+        username: admin
+        password: district
+      playdemo:
+        type: dhis2
+        baseUrl: https://play.dhis2.org/demo
+        username: admin
+        password: district
+    groups:
+      play:
+        - playdev
+        - playdemo
+    verify: true

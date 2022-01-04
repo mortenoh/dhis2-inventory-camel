@@ -5,16 +5,6 @@ camel:
   springboot:
     main-run-controller: false # true for long-running camel tasks
 dhis2:
-  source:
-    host: playdev
-    properties:
-      token: MyToken 123123
-  destination:
-    hosts:
-      - playdev
-      - playdemo
-    properties:
-      token: SomeToken ID123
   inventory:
     hosts:
       playdev:
@@ -22,13 +12,40 @@ dhis2:
         baseUrl: https://play.dhis2.org/dev
         username: admin
         password: district
-      playdemo:
+      playdev123:
+        type: dhis2
+        baseUrl: https://play.dhis2.org/dev
+        header:
+          X-Token: XUZ
+      playdemoadmin:
         type: dhis2
         baseUrl: https://play.dhis2.org/demo
         username: admin
         password: district
+      playdemonormal:
+        type: dhis2
+        baseUrl: https://play.dhis2.org/demo
+        username: admin123
+        password: district
+      play123:
+        type: dhis2
+        baseUrl: https://play.dhis2.org/demo
+        auths:
+          default:
+            type: basic? pat? oauth2 token?
+            username: admin
+            password: district
+          morten:
+            type: basic? pat? oauth2 token?
+            username: morten
+            password: district
     groups:
-      play:
+      playsrc:
         - playdev
-        - playdemo
-    verify: true
+      playdst:
+        - playdemo # ok?
+        - play123 # email? sms? fail everything?
+
+# play123@default
+# play123@morten
+# host@auth_name
